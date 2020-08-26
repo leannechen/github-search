@@ -199,6 +199,7 @@ function App() {
           <div className={appStyle.searchInputContainer}>
             <input
               type="text"
+              autoFocus
               className={appStyle.searchInput}
               placeholder="Type something for search"
               onChange={handleInputChange}
