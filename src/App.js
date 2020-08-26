@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faCircle, faSearch, faSyncAlt, faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faCircle, faSearch, faSyncAlt, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import imgCat from "./img/coding-cat.jpg";
 import appStyle from "./App.module.css";
 
 function debounce(func, delay) {
@@ -194,6 +195,7 @@ function App() {
       <main className={appStyle.main}>
         <header className={appStyle.header}>
           <h1 className={appStyle.siteTitle}>Search Github Repositories</h1>
+          <img src={imgCat} alt="Coding Cat" className={appStyle.imgCat} />
           <div className={appStyle.searchInputContainer}>
             <input
               type="text"
@@ -215,7 +217,7 @@ function App() {
           <p className={appStyle.dataCount}>{totalCount} results</p>
         </header>
         <div className={appStyle.resultContainer}>
-          { repoList.length === 0 && <p>目前沒有任何資料</p> }
+          { (repoList.length === 0 && !isLoading) && <p>目前沒有任何資料</p> }
           <div>
             <ul className={appStyle.cardList}>
               { renderCards() }
