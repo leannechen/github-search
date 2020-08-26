@@ -165,7 +165,7 @@ function App() {
   const renderCards = () => {
     return repoList.map((repo, index) => (
       <li key={index} className={appStyle.card}>
-        <a href={repo.svn_url} className={appStyle.cardLink} target="_blank" rel="noreferrer">
+        <a href={repo.svn_url} className={appStyle.cardLink} target="_blank" rel="noopener noreferrer">
           <div>
             <h2 className={appStyle.cardTitle}>{repo.full_name}</h2>
             <p className={appStyle.cardDesc}>{repo.description}</p>
