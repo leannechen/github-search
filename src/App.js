@@ -37,7 +37,6 @@ function App() {
   const debouncedPageSearch = useCallback(
     debounce(
       ({ keyword, page }) => {
-        console.log('page request')
         makeRequest({
           q: keyword,
           page,
@@ -199,6 +198,7 @@ function App() {
           <div className={appStyle.searchInputContainer}>
             <input
               type="text"
+              key="searchInput"
               autoFocus
               className={appStyle.searchInput}
               placeholder="Type something for search"
