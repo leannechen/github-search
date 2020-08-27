@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faCircle, faSearch, faSyncAlt, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faSyncAlt, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import Card from "./components/Card";
 import imgCat from "./img/coding-cat.jpg";
 import appStyle from "./App.module.css";
+
+const GITHUB_API_URL = "https://api.github.com/search/repositories?";
 
 function debounce(func, delay) {
   var timer = null;
@@ -56,12 +58,14 @@ function App() {
     const latestKeyword = keywordRef.current;
 
     if (!latestKeyword) {
+      // Cleanup observer
       if(observer) {
         observer.unobserve(targetEl);
       }
       setIsObservingScroll(false);
     } else if(latestKeyword && !isObservingScroll) {
 
+      // Setup observer
       const options = {
         root: null,
         rootMargin: "0px",
@@ -108,7 +112,7 @@ function App() {
 
     const paramsObj = new URLSearchParams(params);
 
-    return fetch('https://api.github.com/search/repositories?'+ paramsObj, requestConfig)
+    return fetch(GITHUB_API_URL + paramsObj, requestConfig)
       .then(function(response) {
         if(response.ok) {
           return response.json();
