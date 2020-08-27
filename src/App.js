@@ -35,7 +35,7 @@ function App() {
   const keywordRef = useRef();
   keywordRef.current = keyword;
 
-  const loadingRef = useRef(null);
+  const loadingTargetElRef = useRef(null);
 
   const debouncedPageSearch = useCallback(
     debounce(
@@ -54,7 +54,7 @@ function App() {
   useEffect(() => {
 
     let observer;
-    const targetEl = loadingRef.current;
+    const targetEl = loadingTargetElRef.current;
     const latestKeyword = keywordRef.current;
 
     if (!latestKeyword) {
@@ -171,7 +171,11 @@ function App() {
       <main className={appStyle.main}>
         <header className={appStyle.header}>
           <h1 className={appStyle.siteTitle}>Search Github Repositories</h1>
-          <img src={imgCat} alt="Coding Cat" className={appStyle.imgCat} />
+          <img
+            src={imgCat}
+            alt="Coding Cat"
+            className={appStyle.imgCat}
+          />
           <div className={appStyle.searchInputContainer}>
             <input
               type="text"
@@ -200,8 +204,9 @@ function App() {
             <ul className={appStyle.cardList}>
               { repoList.map((repo) => <Card {...repo} />) }
             </ul>
+            {/* When loading target is in view, load more results */}
             <div
-              ref={loadingRef}
+              ref={loadingTargetElRef}
               style={{ height: `100px`, margin: `30px` }}
               className={appStyle.loadingContainer}
             >
