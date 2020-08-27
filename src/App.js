@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faCircle, faSearch, faSyncAlt, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import Card from "./components/Card";
 import imgCat from "./img/coding-cat.jpg";
 import appStyle from "./App.module.css";
 
@@ -161,34 +162,6 @@ function App() {
     debouncedKeywordSearch(e.target.value);
   };
 
-  const renderCards = () => {
-    return repoList.map((repo, index) => (
-      <li key={repo.full_name} className={appStyle.card}>
-        <a href={repo.svn_url} className={appStyle.cardLink} target="_blank" rel="noopener noreferrer">
-          <div>
-            <h2 className={appStyle.cardTitle}>{repo.full_name}</h2>
-            <p className={appStyle.cardDesc}>{repo.description}</p>
-          </div>
-          <div>
-            <div className={appStyle.cardLabelContainer}>
-          <span className={appStyle.cardLabel}>
-            <FontAwesomeIcon icon={faStar} className={`${appStyle.cardIcon} ${appStyle.iconStar}`} />
-            <span>{repo.stargazers_count}</span>
-          </span>
-              <span className={appStyle.cardLabel}>
-            <FontAwesomeIcon icon={faCircle} className={`${appStyle.cardIcon} ${appStyle.iconCircle}`} />
-            <span>{repo.language}</span>
-          </span>
-            </div>
-            <div className={appStyle.cardFooter}>
-              <span className={appStyle.cardFootNote}>{repo.license? repo.license.name: "No license specified"}</span>
-            </div>
-          </div>
-        </a>
-      </li>
-    ))
-  };
-
   return (
     <div className={appStyle.app}>
       <main className={appStyle.main}>
@@ -221,7 +194,7 @@ function App() {
           { (repoList.length === 0 && !isLoading) && <p>目前沒有任何資料</p> }
           <div>
             <ul className={appStyle.cardList}>
-              { renderCards() }
+              { repoList.map((repo) => <Card {...repo} />) }
             </ul>
             <div
               ref={loadingRef}
