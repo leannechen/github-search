@@ -23,7 +23,7 @@ function App() {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ repoList, setRepoList ] = useState([]);
   const [ totalCount, setTotalCount ] = useState(0);
-  const [ isSubscribing, setIsSubscribing ] = useState(false);
+  const [ isObservingScroll, setIsObservingScroll ] = useState(false);
 
   // in order to access latest `page`
   const pageRef = useRef();
@@ -58,8 +58,8 @@ function App() {
       if(observer) {
         observer.unobserve(targetEl);
       }
-      setIsSubscribing(false);
-    } else if(latestKeyword && !isSubscribing) {
+      setIsObservingScroll(false);
+    } else if(latestKeyword && !isObservingScroll) {
 
       const options = {
         root: null,
@@ -85,11 +85,11 @@ function App() {
 
       if(targetEl) {
         observer.observe(targetEl);
-        setIsSubscribing(true);
+        setIsObservingScroll(true);
       }
     }
 
-  }, [debouncedPageSearch, isSubscribing, keyword]);
+  }, [debouncedPageSearch, isObservingScroll, keyword]);
 
   const makeRequest = (params, isInitialRequest) => {
 
@@ -153,7 +153,7 @@ function App() {
       setRepoList([]);
       setTotalCount(0);
       setIsLoading(false);
-      setIsSubscribing(false);
+      setIsObservingScroll(false);
 
       return;
     }
