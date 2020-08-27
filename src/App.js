@@ -33,11 +33,11 @@ function App() {
   keywordRef.current = keyword;
 
   const loadingRef = useRef(null);
-  const inputElRef = useRef(null);
 
   const debouncedPageSearch = useCallback(
     debounce(
       ({ keyword, page }) => {
+        console.log('page request')
         makeRequest({
           q: keyword,
           page,
@@ -91,10 +91,6 @@ function App() {
     }
 
   }, [debouncedPageSearch, isSubscribing, keyword]);
-
-  useEffect(() => {
-    inputElRef.current.focus();
-  });
 
   const makeRequest = (params, isInitialRequest) => {
 
@@ -203,7 +199,6 @@ function App() {
           <div className={appStyle.searchInputContainer}>
             <input
               type="text"
-              ref={inputElRef}
               autoFocus
               className={appStyle.searchInput}
               placeholder="Type something for search"
