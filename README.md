@@ -11,4 +11,4 @@ A SPA with infinite scroll implementation ([Demo](https://github-search-demo.net
 ### Todo
 - [ ] RWD (pad, mobile)
 - [ ] Make `makeRuest` do only requesting (instead of setting states)
-
+- [ ] Error handling
